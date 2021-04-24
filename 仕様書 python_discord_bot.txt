@@ -17,3 +17,6 @@ Python Discord Bot " Lyla "
 
 実装予定
  #半AI化
+
+メモ
+TOKENは旧トークンでダミーなのでランタイム時は新しいものを使用
