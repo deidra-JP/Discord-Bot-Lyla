@@ -262,6 +262,7 @@ async def on_message(message):
     if message.content.endswith("検索して"):
         ModeFlag = 1
         await message.channel.send('何について調べるー？')  
+                
 # Botの起動とDiscordサーバーへの接続
 client.run(TOKEN)
 
