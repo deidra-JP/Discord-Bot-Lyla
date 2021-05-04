@@ -54,6 +54,6 @@ uranai_list = [
 
 [config]
 token = "ODMxMzU1MDAyMDE0NTMxNjI1.YHUBrg.EqxrGBTuCH17vs0XYKROsSPwChM"
-channel_id = "テストしたいチャンネルのid"
+channel_id = テストしたいチャンネルのid
 
 
