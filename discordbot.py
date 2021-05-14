@@ -4,6 +4,8 @@ import discord
 import toml
 import asyncio
 import random
+import os
+import pickle
 from googlesearch import search
 
 
@@ -12,6 +14,7 @@ TOKEN = CONFIG['config']['token']
 CHANNELID = CONFIG['config']['channel_id']
 client = discord.Client()
 uranai = CONFIG['uranai_list'] 
+path = "C:/Users/deidra/Desktop/学習用プロジェクト/Py_discord_bot_lyla"
 
 ModeFlag = 0
 
@@ -21,7 +24,13 @@ async def on_ready():
     print('ログインしました')
     channel = client.get_channel(CHANNELID)
     await channel.send('んんっ～　起床！！')
-    
+text_path = os.path.join(path,"text.sav")
+try:
+    file = open(text_path,"rb")
+    texten = pickle.load(file)
+    file.close
+except:
+    texten = []
 
 @client.event
 async def reply(message):
@@ -262,7 +271,21 @@ async def on_message(message):
     if message.content.endswith("検索して"):
         ModeFlag = 1
         await message.channel.send('何について調べるー？')  
-                
+    
+    #誰かがセーブお願いと発言すると蓄積したデータがtext.savに保存される。
+    if message.content.endswith("セーブお願い"):  
+        file =open(text_path, "wb")
+        pickle.dump(texten,file)
+        file.close()
+        await message.channel.send('セーブ完了！')
+    
+    #!SHUTDOWN_BOTが入力されたら強制終了
+    if message.content.startswith('!SHUTDOWN_BOT_LYLA'):
+        await message.channel.send('おやすみなさい( ˘ω˘ )')
+        await client.logout()
+        await sys.exit()            
+        
+
 # Botの起動とDiscordサーバーへの接続
 client.run(TOKEN)
 
