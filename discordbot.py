@@ -35,13 +35,16 @@ except:
 # リプライを貰うとそのユーザーのsavが作成される。
 @client.event
 async def reply(message):
-    random_mention = ["君の事憶えとくね！", "これから憶えとくね！", "記憶力〇", "記憶力◎", "記憶しとくよ～"]
-    mention_hentou = random.choice(random_mention)
-    reply = f'{message.author.mention}' + mention_hentou 
-    await message.channel.send(reply)        
-    file = open(text_path, "wb")
-    pickle.dump(texten,file)
-    file.close()
+    if message.content.endswith("セーブファイル作って"):
+        random_mention = ["君の事憶えとくね！", "これから憶えとくね！", "記憶力〇", "記憶力◎", "記憶しとくよ～"]
+        mention_hentou = random.choice(random_mention)
+        reply = f'{message.author.mention}' + mention_hentou 
+        await message.channel.send(reply)
+        user_info_id = f'{message.author.id}'
+        text_path = os.path.join(path, user_info_id + "info.sav")        
+        file = open(text_path, "wb")
+        pickle.dump(texten,file)
+        file.close()
 
 # メッセージ受信時に動作する処理
 @client.event
