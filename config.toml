@@ -53,12 +53,7 @@ uranai_list = [
 ]
 
 [config]
-<<<<<<< HEAD
-token = "ODMxMzU1MDAyMDE0NTMxNjI1.YHUBrg.VDAaN0q6JhTOkoBBhmhvLXyIIps"
-channel_id = 831420404286881827
-=======
-token = "ODMxMzU1MDAyMDE0NTMxNjI1.YHUBrg.EqxrGBTuCH17vs0XYKROsSPwChM"
-channel_id = テストしたいチャンネルのid
->>>>>>> 31103673f45f817e609c4be930155e8bd810ac3a
+token = ""
+channel_id = 
 
 

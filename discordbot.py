@@ -14,9 +14,9 @@ TOKEN = CONFIG['config']['token']
 CHANNELID = CONFIG['config']['channel_id']
 client = discord.Client()
 uranai = CONFIG['uranai_list'] 
-path = "C:/Users/deidra/Desktop/学習用プロジェクト/Py_discord_bot_lyla"
-
+path = "C:/Users/deidra/Desktop/学習用プロジェクト/Py_discord_bot_lyla/.user_info/"
 ModeFlag = 0
+    
 
 # 起動時に動作する処理
 @client.event
@@ -24,20 +24,24 @@ async def on_ready():
     print('ログインしました')
     channel = client.get_channel(CHANNELID)
     await channel.send('んんっ～　起床！！')
-text_path = os.path.join(path,"text.sav")
+text_path = os.path.join(path, "info.sav")
 try:
-    file = open(text_path,"rb")
-    texten = pickle.load(file)
-    file.close
+   file = open(text_path,"rb")
+   texten = pickle.load(file)
+   file.close
 except:
-    texten = []
+   texten = []    
 
+# リプライを貰うとそのユーザーのsavが作成される。
 @client.event
 async def reply(message):
-    random_mention = ["何か用カナ？", "どうしたん？", "何か用かい？", "何か困りごと？", "助けが必要カナ？"]
+    random_mention = ["君の事憶えとくね！", "これから憶えとくね！", "記憶力〇", "記憶力◎", "記憶しとくよ～"]
     mention_hentou = random.choice(random_mention)
-    reply = f'{message.author.mention}' + mention_hentou # 返信メッセージの作成
-    await message.channel.send(reply)
+    reply = f'{message.author.mention}' + mention_hentou 
+    await message.channel.send(reply)        
+    file = open(text_path, "wb")
+    pickle.dump(texten,file)
+    file.close()
 
 # メッセージ受信時に動作する処理
 @client.event
@@ -274,9 +278,6 @@ async def on_message(message):
     
     #誰かがセーブお願いと発言すると蓄積したデータがtext.savに保存される。
     if message.content.endswith("セーブお願い"):  
-        file =open(text_path, "wb")
-        pickle.dump(texten,file)
-        file.close()
         await message.channel.send('セーブ完了！')
     
     #!SHUTDOWN_BOTが入力されたら強制終了
