@@ -276,10 +276,6 @@ async def on_message(message):
         ModeFlag = 1
         await message.channel.send('何について調べるー？')  
     
-    #誰かがセーブお願いと発言すると蓄積したデータがtext.savに保存される。
-    if message.content.endswith("セーブお願い"):  
-        await message.channel.send('セーブ完了！')
-    
     #!SHUTDOWN_BOTが入力されたら強制終了
     if message.content.startswith('!SHUTDOWN_BOT_LYLA'):
         await message.channel.send('おやすみなさい( ˘ω˘ )')
