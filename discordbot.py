@@ -78,7 +78,7 @@ async def reply(message):
         await message.channel.send('おはおは～！')                      
     
     #おはよう返答ランダムリスト（おはよ）
-    if message.content.startswith("おはよ"):
+    if message.content.endswith("おはよ"):
         random_ohayou = ["おはよう！", "オハヨ！", "おはようね～", "おはよん！", "おはー！", "おはおは！",
          "おはぽよやほい！", "おはよぉ～！", "おはようさん～！", "おはようさん！", "おはよーさん！",
           "おはよ～！", "おはよー！", "おはようさんね！", "おはよ！"]
@@ -287,12 +287,6 @@ async def reply(message):
         await message.channel.send('おやすみなさい( ˘ω˘ )')
         await client.logout()
         await sys.exit() 
-
-# 話しかけられたかの判定
-@client.event
-async def on_message(message):
-    if client.user in message.mentions:
-        await reply(message)  
 
 # メッセージ受信時に動作する処理
 @client.event
@@ -554,6 +548,12 @@ async def on_message(message):
         await message.channel.send('おやすみなさい( ˘ω˘ )')
         await client.logout()
         await sys.exit()              
+
+# 話しかけられたかの判定
+@client.event
+async def on_message(message):
+    if client.user in message.mentions:
+        await reply(message)  
 
 # Botの起動とDiscordサーバーへの接続
 client.run(TOKEN)
