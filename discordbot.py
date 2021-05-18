@@ -31,6 +31,7 @@ async def on_ready():
 # メンション受け取り時の処理
 @client.event
 async def reply(message):
+    global ModeFlag
     if message.author.bot:
         return
     
@@ -160,60 +161,8 @@ async def reply(message):
         await message.channel.send('やっほ～！')    
     if message.content == 'やっほ～！':
         await message.channel.send('やっほ～')              
-
-    #下ネタ返答リスト
-    if message.content.startswith("ちんこ"):    
-        random_simoneta_hentou = ["は？", "最低ね", "はぁ？", "低俗ね", "あ？？？？"]
-        simoneta_hentou_tinnko = random.choice(random_simoneta_hentou)
-        await message.channel.send(simoneta_hentou_tinnko)
-    if message.content.startswith("まんこ"):    
-        random_simoneta_hentou2 = ["は？最低", "最低ね・・・", "はぁ？ちょっと", "低俗ねあなた", "あぁ？？？？"]
-        simoneta_hentou_manko = random.choice(random_simoneta_hentou2)
-        await message.channel.send(simoneta_hentou_manko) 
-    if message.content.startswith("おちんちん"):    
-        random_simoneta_hentou3 = ["何言ってるの？", "あなた最低ね", "ねえはぁ？", "ほんと低俗ね", "あ？"]
-        simoneta_hentou_otinntinn = random.choice(random_simoneta_hentou3)
-        await message.channel.send(simoneta_hentou_otinntinn)  
-    if message.content.startswith("ちんぽ"):    
-        random_simoneta_hentou4 = ["は？きも", "きもい最低ね", "はぁ？ちょっとやめて", "最低で低俗ね", "あ？？"]
-        simoneta_hentou_tinnpo = random.choice(random_simoneta_hentou4)
-        await message.channel.send(simoneta_hentou_tinnpo)  
-    if message.content.startswith("うんこ"):    
-        random_simoneta_hentou5 = ["トイレ行ってきな", "小学生か", "きちゃない", "手洗った？", "トイレットペーパーあった？"]
-        simoneta_hentou_unnko = random.choice(random_simoneta_hentou5)
-        await message.channel.send(simoneta_hentou_unnko)          
-    if message.content.startswith("うんち"):    
-        random_simoneta_hentou6 = ["トイレ行ってきなて", "中学生か", "きちゃないよ", "手洗ったかい？", "トイレットペーパー足しといて"]
-        simoneta_hentou_unnti = random.choice(random_simoneta_hentou6)
-        await message.channel.send(simoneta_hentou_unnti) 
-    if message.content.startswith("ﾁﾝﾎﾟ"):    
-        random_simoneta_hentou7 = ["は？きも", "きもい最低ね", "はぁ？ちょっとやめて", "最低で低俗ね", "あ？？"]
-        simoneta_hentou_tinnpox = random.choice(random_simoneta_hentou7)
-        await message.channel.send(simoneta_hentou_tinnpox) 
-    if message.content.startswith("ウンチ"):    
-        random_simoneta_hentou8 = ["はやくトイレ行ってきなて", "男子中学生か", "きちゃないよぺっぺ", "手洗ったかな？", "トイレットペーパー足して"]
-        simoneta_hentou_unntixx = random.choice(random_simoneta_hentou8)
-        await message.channel.send(simoneta_hentou_unntixx)  
-    if message.content.startswith("ウンコ"):    
-        random_simoneta_hentou9 = ["トイレ行ってきなゴリラ", "ゴリラ", "ウホ", "？", "トイレットペーパー使える？"]
-        simoneta_hentou_unnkoxx = random.choice(random_simoneta_hentou9)
-        await message.channel.send(simoneta_hentou_unnkoxx)   
-    if message.content.startswith("チンコ"):    
-        random_simoneta_hentou10 = ["は・・・？", "最低ねほんと", "はぁ・・・？", "低俗ねほんと", "あ？？は？？"]
-        simoneta_hentou_tinnkoxx = random.choice(random_simoneta_hentou10)
-        await message.channel.send(simoneta_hentou_tinnkoxx)     
-    if message.content.startswith("マンコ"):    
-        random_simoneta_hentou11 = ["は？最低・・・", "最低ね・・・やめて", "はぁ？ちょっときもい", "最低最悪低俗ねあなた", "あぁ？？？？もっかいいってみ？"]
-        simoneta_hentou_mankoxx = random.choice(random_simoneta_hentou11)
-        await message.channel.send(simoneta_hentou_mankoxx)  
-    if message.content.startswith("オチンチン"):    
-        random_simoneta_hentou12 = ["何言ってるの？中年のキモオヤジ", "あなた最低ねはじを知りなさい", "ねえはぁ？やめて", "ほんっと低俗ね", "あ？ねえ"]
-        simoneta_hentou_otinntinnxx = random.choice(random_simoneta_hentou12)
-        await message.channel.send(simoneta_hentou_otinntinnxx)   
-    if message.content.startswith("チンポ"):    
-        random_simoneta_hentou13 = ["は？きもいんだけど", "きもい最低クズ", "はぁ？ちょっとやめてださないでよ", "最低で低俗ね、、鏡観たことある？", "あ？？は？？"]
-        simoneta_hentou_tinnpoxx = random.choice(random_simoneta_hentou13)
-        await message.channel.send(simoneta_hentou_tinnpoxx)                                
+    
+    # ポートフォリオに適さない為、64行分Githubから削除
 
     # 名前付きで返す
     if message.content.startswith("ライラ"):
@@ -287,6 +236,12 @@ async def reply(message):
         await message.channel.send('おやすみなさい( ˘ω˘ )')
         await client.logout()
         await sys.exit() 
+
+# 話しかけられたかの判定
+@client.event
+async def on_message(message):
+    if client.user in message.mentions:
+        await reply(message)  
 
 # メッセージ受信時に動作する処理
 @client.event
@@ -422,59 +377,7 @@ async def on_message(message):
     if message.content == 'やっほ～！':
         await message.channel.send('やっほ～')              
 
-    #下ネタ返答リスト
-    if message.content.startswith("ちんこ"):    
-        random_simoneta_hentou = ["は？", "最低ね", "はぁ？", "低俗ね", "あ？？？？"]
-        simoneta_hentou_tinnko = random.choice(random_simoneta_hentou)
-        await message.channel.send(simoneta_hentou_tinnko)
-    if message.content.startswith("まんこ"):    
-        random_simoneta_hentou2 = ["は？最低", "最低ね・・・", "はぁ？ちょっと", "低俗ねあなた", "あぁ？？？？"]
-        simoneta_hentou_manko = random.choice(random_simoneta_hentou2)
-        await message.channel.send(simoneta_hentou_manko) 
-    if message.content.startswith("おちんちん"):    
-        random_simoneta_hentou3 = ["何言ってるの？", "あなた最低ね", "ねえはぁ？", "ほんと低俗ね", "あ？"]
-        simoneta_hentou_otinntinn = random.choice(random_simoneta_hentou3)
-        await message.channel.send(simoneta_hentou_otinntinn)  
-    if message.content.startswith("ちんぽ"):    
-        random_simoneta_hentou4 = ["は？きも", "きもい最低ね", "はぁ？ちょっとやめて", "最低で低俗ね", "あ？？"]
-        simoneta_hentou_tinnpo = random.choice(random_simoneta_hentou4)
-        await message.channel.send(simoneta_hentou_tinnpo)  
-    if message.content.startswith("うんこ"):    
-        random_simoneta_hentou5 = ["トイレ行ってきな", "小学生か", "きちゃない", "手洗った？", "トイレットペーパーあった？"]
-        simoneta_hentou_unnko = random.choice(random_simoneta_hentou5)
-        await message.channel.send(simoneta_hentou_unnko)          
-    if message.content.startswith("うんち"):    
-        random_simoneta_hentou6 = ["トイレ行ってきなて", "中学生か", "きちゃないよ", "手洗ったかい？", "トイレットペーパー足しといて"]
-        simoneta_hentou_unnti = random.choice(random_simoneta_hentou6)
-        await message.channel.send(simoneta_hentou_unnti) 
-    if message.content.startswith("ﾁﾝﾎﾟ"):    
-        random_simoneta_hentou7 = ["は？きも", "きもい最低ね", "はぁ？ちょっとやめて", "最低で低俗ね", "あ？？"]
-        simoneta_hentou_tinnpox = random.choice(random_simoneta_hentou7)
-        await message.channel.send(simoneta_hentou_tinnpox) 
-    if message.content.startswith("ウンチ"):    
-        random_simoneta_hentou8 = ["はやくトイレ行ってきなて", "男子中学生か", "きちゃないよぺっぺ", "手洗ったかな？", "トイレットペーパー足して"]
-        simoneta_hentou_unntixx = random.choice(random_simoneta_hentou8)
-        await message.channel.send(simoneta_hentou_unntixx)  
-    if message.content.startswith("ウンコ"):    
-        random_simoneta_hentou9 = ["トイレ行ってきなゴリラ", "ゴリラ", "ウホ", "？", "トイレットペーパー使える？"]
-        simoneta_hentou_unnkoxx = random.choice(random_simoneta_hentou9)
-        await message.channel.send(simoneta_hentou_unnkoxx)   
-    if message.content.startswith("チンコ"):    
-        random_simoneta_hentou10 = ["は・・・？", "最低ねほんと", "はぁ・・・？", "低俗ねほんと", "あ？？は？？"]
-        simoneta_hentou_tinnkoxx = random.choice(random_simoneta_hentou10)
-        await message.channel.send(simoneta_hentou_tinnkoxx)     
-    if message.content.startswith("マンコ"):    
-        random_simoneta_hentou11 = ["は？最低・・・", "最低ね・・・やめて", "はぁ？ちょっときもい", "最低最悪低俗ねあなた", "あぁ？？？？もっかいいってみ？"]
-        simoneta_hentou_mankoxx = random.choice(random_simoneta_hentou11)
-        await message.channel.send(simoneta_hentou_mankoxx)  
-    if message.content.startswith("オチンチン"):    
-        random_simoneta_hentou12 = ["何言ってるの？中年のキモオヤジ", "あなた最低ねはじを知りなさい", "ねえはぁ？やめて", "ほんっと低俗ね", "あ？ねえ"]
-        simoneta_hentou_otinntinnxx = random.choice(random_simoneta_hentou12)
-        await message.channel.send(simoneta_hentou_otinntinnxx)   
-    if message.content.startswith("チンポ"):    
-        random_simoneta_hentou13 = ["は？きもいんだけど", "きもい最低クズ", "はぁ？ちょっとやめてださないでよ", "最低で低俗ね、、鏡観たことある？", "あ？？は？？"]
-        simoneta_hentou_tinnpoxx = random.choice(random_simoneta_hentou13)
-        await message.channel.send(simoneta_hentou_tinnpoxx)                                
+    # ポートフォリオに適さない為、64行分Githubから削除
 
     # 名前付きで返す
     if message.content.startswith("ライラ"):
@@ -548,12 +451,6 @@ async def on_message(message):
         await message.channel.send('おやすみなさい( ˘ω˘ )')
         await client.logout()
         await sys.exit()              
-
-# 話しかけられたかの判定
-@client.event
-async def on_message(message):
-    if client.user in message.mentions:
-        await reply(message)  
 
 # Botの起動とDiscordサーバーへの接続
 client.run(TOKEN)
