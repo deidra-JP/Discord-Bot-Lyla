@@ -1,4 +1,4 @@
-# インストールした discord.py を読み込む
+# メッセージに反応する関数をまとめる
 import sys
 import discord
 import toml
@@ -7,6 +7,9 @@ import random
 import os
 import pickle
 import datetime
+import hashlib
+import picture_print
+import long_text_print
 from googlesearch import search
 
 
@@ -184,7 +187,8 @@ async def on_message(message):
         await message.channel.send("やっほ～")     
     
     # ポートフォリオに適さない為、64行分Githubから削除
-    
+            
+
     # 名前付きで返す 
     if message.content.endswith("ライラ"):
         random_namae_henji = ["君呼んだ？", "君呼んだー？", "君なんか用ー？", "君やほい", "君おつかり！", "君やっほ！", "君呼んだかな～？", "♡"]
@@ -226,10 +230,16 @@ async def on_message(message):
         num_random12 = random.randrange(100000000000,999999999999)
         random12 = str(num_random12)
         await message.channel.send("はいよ！" + random12)
+    
+    # CryptoGame用sha256ハッシュ関数
+    if message.content.endswith("BotWar"):
+        str_CHANNELID = str(CHANNELID)
+        Bot_War_ID = hashlib.sha256(TOKEN.encode('utf-8') + str_CHANNELID.encode('utf-8')).hexdigest()
+        print(Bot_War_ID)
 
     # しょーもな返答リスト
     if message.content.endswith("俺以外ダメージでてなさすぎ"):
-        await message.channel.send('それで負けてるんだから意味ねえんだよ　しょーもないハラスしてる暇あったらオブジェクト絡めボケ') 
+        await message.channel.send("それで負けてるんだから意味ねえんだよ　しょーもないハラスしてる暇あったらオブジェクト絡めボケ") 
 
     # 検索機能
     if message.content == '検索終了':
@@ -250,11 +260,15 @@ async def on_message(message):
     # google検索モードへの切り替え
     if message.content.endswith("検索して"):
         ModeFlag = 1
-        await message.channel.send('何について調べるー？')  
+        await message.channel.send("何について調べるー？")  
+    
+    await picture_print.picture_message(message)
+    
+    await long_text_print.long_text_message(message)
 
     #!SHUTDOWN_BOTが入力されたら強制終了
-    if message.content.endswith('!SHUTDOWN_BOT_LYLA'):
-        await message.channel.send('おやすみなさい( ˘ω˘ )')
+    if message.content.endswith("!SHUTDOWN_BOT_LYLA"):
+        await message.channel.send("おやすみなさい( ˘ω˘ )")
         await client.logout()
         await sys.exit()              
 
