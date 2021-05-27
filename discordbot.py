@@ -187,7 +187,7 @@ async def on_message(message):
         await message.channel.send("やっほ～")     
     
     # ポートフォリオに適さない為、64行分Githubから削除
-            
+     
 
     # 名前付きで返す 
     if message.content.endswith("ライラ"):
@@ -253,6 +253,13 @@ async def on_message(message):
         # 日本語で検索した上位5件を順番に表示
         for url in search(kensaku, lang="jp",num = 5):
             await message.channel.send(url)
+            text_path = path + user_info_id + "date" + datetime_today + "info.sav"
+            file = open(text_path, "wb")
+            url_str = str(url)
+            user_info_list.append(kensaku + url_str)
+            pickle.dump(user_info_list,file)
+            file.close()
+            print(user_info_list)
             count += 1
             if(count == 5):
                break  
@@ -262,6 +269,16 @@ async def on_message(message):
         ModeFlag = 1
         await message.channel.send("何について調べるー？")  
     
+    # 指定した日時のリストを取り出す
+    if message.content.startswith("date2"):
+        save_yobidasi = message.content
+        save_id = f'{message.author.id}'
+        save_file = os.path.join(path, save_id + save_yobidasi)
+        file = open(save_file, "rb")
+        load = pickle.load(file)
+        file.close()
+        print(f'{load[1]}')
+
     await picture_print.picture_message(message)
     
     await long_text_print.long_text_message(message)
