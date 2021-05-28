@@ -2,7 +2,6 @@
 import sys
 import discord
 import toml
-import asyncio
 import random
 import os
 import pickle
@@ -10,6 +9,8 @@ import datetime
 import hashlib
 import picture_print
 import long_text_print
+import urllib.request
+import json
 from googlesearch import search
 
 
@@ -22,7 +23,9 @@ path = "C:/Users/deidra/Desktop/学習用プロジェクト/Py_discord_bot_lyla/
 ModeFlag = 0
 datetime_today = f'{datetime.date.today()}'
 user_info_list = []
-    
+citycode = '090010'
+weather = urllib.request.urlopen('https://weather.tsukumijima.net/api/forecast/city/' + citycode).read()
+weather = json.loads(weather.decode('utf-8'))
 
 # 起動時に動作する処理
 @client.event
@@ -187,7 +190,7 @@ async def on_message(message):
         await message.channel.send("やっほ～")     
     
     # ポートフォリオに適さない為、64行分Githubから削除
-     
+         
 
     # 名前付きで返す 
     if message.content.endswith("ライラ"):
@@ -240,6 +243,15 @@ async def on_message(message):
     # しょーもな返答リスト
     if message.content.endswith("俺以外ダメージでてなさすぎ"):
         await message.channel.send("それで負けてるんだから意味ねえんだよ　しょーもないハラスしてる暇あったらオブジェクト絡めボケ") 
+
+    # 天気予報機能
+    if message.content.endswith("天気予報お願い"):
+        weather_hentou = weather['location']['city']
+        weather_hentou += "の天気は、\n"
+        for w in weather['forecasts']:
+            weather_hentou += w['dateLabel'] + "が" + w['telop'] + "\n"
+        weather_hentou += "です。"
+        await message.channel.send(weather_hentou)
 
     # 検索機能
     if message.content == '検索終了':
