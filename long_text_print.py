@@ -3,6 +3,7 @@ import random
 
 client = discord.Client()
 
+
 async def long_text_message(message):
 # テキスト長文返答
     if message.content == "長文":

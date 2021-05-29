@@ -6,7 +6,7 @@ client = discord.Client()
 async def picture_message(message):
 # 画像返答
     if message.content == "画像":
-        atarimaeda_path = 'C:/Users/deidra/Desktop/学習用プロジェクト/Py_discord_bot_lyla/picture/illegal/1.png'
+        atarimaeda_path = 'C:/Users/deidra/Desktop/学習用プロジェクト/Py_discord_bot_lyla/picture/illegal/1.jpg'
         hansei_path = 'C:/Users/deidra/Desktop/学習用プロジェクト/Py_discord_bot_lyla/picture/illegal/2.png'
         file = [atarimaeda_path, hansei_path]
         file2 = random.choice(file)
