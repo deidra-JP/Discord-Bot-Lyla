@@ -7,10 +7,11 @@ import os
 import pickle
 import datetime
 import hashlib
-import picture_print
-import long_text_print
-import weather_forecast
-import greeting_jp
+from module import picture_print
+from module import long_text_print
+from module import weather_forecast
+from module import greeting_jp
+from module import news_scraping
 from googlesearch import search
 
 
@@ -19,7 +20,7 @@ TOKEN = CONFIG['config']['token']
 CHANNELID = CONFIG['config']['channel_id']
 client = discord.Client()
 uranai = CONFIG['uranai_list'] 
-path = "C:/Users/deidra/Desktop/学習用プロジェクト/Py_discord_bot_lyla/.user_info/"
+path = "C:/Users/deidra/Desktop/学習用プロジェクト/Py_discord_bot_lyla/.info/.user_info/"
 ModeFlag = 0
 datetime_today = f'{datetime.date.today()}'
 user_info_list = []
@@ -123,6 +124,8 @@ async def on_message(message):
     await weather_forecast.weather_message(message)
 
     await greeting_jp.greeting_jp_message(message)
+
+    await news_scraping.news_message(message)
 
     #!SHUTDOWN_BOTが入力されたら強制終了
     if message.content.endswith("!SHUTDOWN_BOT_LYLA"):

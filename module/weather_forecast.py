@@ -6,10 +6,10 @@ import datetime
 import os
 
 client = discord.Client()
-path = "C:/Users/deidra/Desktop/学習用プロジェクト/Py_discord_bot_lyla/.user_info/"
-datetime_today = f'{datetime.date.today()}'
+weather_path = "C:/Users/deidra/Desktop/学習用プロジェクト/Py_discord_bot_lyla/.info/.weather_info/"
+w_datetime_today = f'{datetime.date.today()}'
 weather_list = []
-user_info_list =[]
+
 
 
 async def weather_message(message):
@@ -168,10 +168,9 @@ async def weather_message(message):
             weather_hentou += w['dateLabel'] + "が" + w['telop'] + "\n"
         weather_hentou += "です。"
         await message.channel.send(weather_hentou)
-        user_info_id = f'{message.author.id}'
-        text_path = os.path.join(path, user_info_id + "date" + datetime_today + "info.sav")        
-        file = open(text_path, "wb")
-        user_info_list.append(weather_hentou)
-        pickle.dump(user_info_list,file)
+        w_text_path = os.path.join(weather_path, "weather_date" + w_datetime_today + "info.sav")        
+        file = open(w_text_path, "wb")
+        weather_list.append(weather_hentou)
+        pickle.dump(weather_list,file)
         file.close()
-        print(user_info_list)
+        print(weather_list)
