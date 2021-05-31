@@ -125,7 +125,23 @@ async def on_message(message):
 
     await greeting_jp.greeting_jp_message(message)
 
-    await news_scraping.news_message(message)
+    await news_scraping.economy_news_message(message)
+
+    await news_scraping.domestic_news_message(message)
+
+    await news_scraping.world_news_message(message)
+
+    await news_scraping.entertainment_news_message(message)
+
+    await news_scraping.sports_news_message(message)
+
+    await news_scraping.it_news_message(message)
+
+    await news_scraping.science_news_message(message)
+
+    await news_scraping.life_news_message(message)
+
+    await news_scraping.local_news_message(message)
 
     #!SHUTDOWN_BOTが入力されたら強制終了
     if message.content.endswith("!SHUTDOWN_BOT_LYLA"):

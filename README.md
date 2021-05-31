@@ -19,6 +19,7 @@
 * １２桁のランダム整数作成
 * sha256を使った秘密鍵作成
 * グーグル検索
+* ニュース検索
 * 保存してある画像やテキストを出力
 * ユーザーの情報を日時と共に保存
 * デーモン化
@@ -28,12 +29,17 @@
 * 音声認識
 * 画像認識
 
-#　Rloginのコマンドメモ
-botの操作は以下コマンド
-起動：sudo systemctl start discordbot_lyla.service 
-再起動：sudo systemctl restart discordbot_lyla.service 
-停止：sudo systemctl stop discordbot_lyla.service
-ステータス確認：sudo systemctl status discordbot_lyla.service
+windows10での起動　　
 
-エラーログも含め、ログは /var/log/syslog に出るので、ソースコードいじって再起動して起動時のログを確認する時は、別のタブ開いて以下コマンドを打って確認しながらやる
-sudo tail -f  /var/log/syslog
+$ py -3 discordbot.py
+
+Ubuntu + Rloginでの起動&デーモン化
+
+起動：          $ sudo systemctl start discordbot_lyla.service 
+再起動：        $ sudo systemctl restart discordbot_lyla.service 
+停止：          $ sudo systemctl stop discordbot_lyla.service
+ステータス確認： $ sudo systemctl status discordbot_lyla.service
+
+エラーログも含め、ログは /var/log/syslog 
+
+$ sudo tail -f  /var/log/syslog
