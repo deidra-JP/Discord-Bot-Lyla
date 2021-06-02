@@ -12,6 +12,7 @@ from module import long_text_print
 from module import weather_forecast
 from module import greeting_jp
 from module import news_scraping
+from module import spreadsheet
 from googlesearch import search
 
 
@@ -142,6 +143,8 @@ async def on_message(message):
     await news_scraping.life_news_message(message)
 
     await news_scraping.local_news_message(message)
+
+    await spreadsheet.ledger(message)
 
     #!SHUTDOWN_BOTが入力されたら強制終了
     if message.content.endswith("!SHUTDOWN_BOT_LYLA"):

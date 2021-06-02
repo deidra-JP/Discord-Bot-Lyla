@@ -132,7 +132,60 @@ async def greeting_jp_message(message):
         await message.channel.send("やっほ～")     
     
     # ポートフォリオに適さない為、64行分Githubから削除
-     
+     #下ネタ返答リスト
+    if message.content.endswith("ちんこ"):    
+        random_simoneta_hentou = ["は？", "最低ね", "はぁ？", "低俗ね", "あ？？？？"]
+        simoneta_hentou_tinnko = random.choice(random_simoneta_hentou)
+        await message.channel.send(simoneta_hentou_tinnko)
+    if message.content.endswith("まんこ"):    
+        random_simoneta_hentou2 = ["は？最低", "最低ね・・・", "はぁ？ちょっと", "低俗ねあなた", "あぁ？？？？"]
+        simoneta_hentou_manko = random.choice(random_simoneta_hentou2)
+        await message.channel.send(simoneta_hentou_manko) 
+    if message.content.endswith("おちんちん"):    
+        random_simoneta_hentou3 = ["何言ってるの？", "あなた最低ね", "ねえはぁ？", "ほんと低俗ね", "あ？"]
+        simoneta_hentou_otinntinn = random.choice(random_simoneta_hentou3)
+        await message.channel.send(simoneta_hentou_otinntinn)  
+    if message.content.endswith("ちんぽ"):    
+        random_simoneta_hentou4 = ["は？きも", "きもい最低ね", "はぁ？ちょっとやめて", "最低で低俗ね", "あ？？"]
+        simoneta_hentou_tinnpo = random.choice(random_simoneta_hentou4)
+        await message.channel.send(simoneta_hentou_tinnpo)  
+    if message.content.endswith("うんこ"):    
+        random_simoneta_hentou5 = ["トイレ行ってきな", "小学生か", "きちゃない", "手洗った？", "トイレットペーパーあった？"]
+        simoneta_hentou_unnko = random.choice(random_simoneta_hentou5)
+        await message.channel.send(simoneta_hentou_unnko)          
+    if message.content.endswith("うんち"):    
+        random_simoneta_hentou6 = ["トイレ行ってきなて", "中学生か", "きちゃないよ", "手洗ったかい？", "トイレットペーパー足しといて"]
+        simoneta_hentou_unnti = random.choice(random_simoneta_hentou6)
+        await message.channel.send(simoneta_hentou_unnti) 
+    if message.content.endswith("ﾁﾝﾎﾟ"):    
+        random_simoneta_hentou7 = ["は？きも", "きもい最低ね", "はぁ？ちょっとやめて", "最低で低俗ね", "あ？？"]
+        simoneta_hentou_tinnpox = random.choice(random_simoneta_hentou7)
+        await message.channel.send(simoneta_hentou_tinnpox) 
+    if message.content.endswith("ウンチ"):    
+        random_simoneta_hentou8 = ["はやくトイレ行ってきなて", "男子中学生か", "きちゃないよぺっぺ", "手洗ったかな？", "トイレットペーパー足して"]
+        simoneta_hentou_unntixx = random.choice(random_simoneta_hentou8)
+        await message.channel.send(simoneta_hentou_unntixx)  
+    if message.content.endswith("ウンコ"):    
+        random_simoneta_hentou9 = ["トイレ行ってきなゴリラ", "ゴリラ", "ウホ", "？", "トイレットペーパー使える？"]
+        simoneta_hentou_unnkoxx = random.choice(random_simoneta_hentou9)
+        await message.channel.send(simoneta_hentou_unnkoxx)   
+    if message.content.endswith("チンコ"):    
+        random_simoneta_hentou10 = ["は・・・？", "最低ねほんと", "はぁ・・・？", "低俗ねほんと", "あ？？は？？"]
+        simoneta_hentou_tinnkoxx = random.choice(random_simoneta_hentou10)
+        await message.channel.send(simoneta_hentou_tinnkoxx)     
+    if message.content.endswith("マンコ"):    
+        random_simoneta_hentou11 = ["は？最低・・・", "最低ね・・・やめて", "はぁ？ちょっときもい", "最低最悪低俗ねあなた", "あぁ？？？？もっかいいってみ？"]
+        simoneta_hentou_mankoxx = random.choice(random_simoneta_hentou11)
+        await message.channel.send(simoneta_hentou_mankoxx)  
+    if message.content.endswith("オチンチン"):    
+        random_simoneta_hentou12 = ["何言ってるの？中年のキモオヤジ", "あなた最低ねはじを知りなさい", "ねえはぁ？やめて", "ほんっと低俗ね", "あ？ねえ"]
+        simoneta_hentou_otinntinnxx = random.choice(random_simoneta_hentou12)
+        await message.channel.send(simoneta_hentou_otinntinnxx)   
+    if message.content.endswith("チンポ"):    
+        random_simoneta_hentou13 = ["は？きもいんだけど", "きもい最低クズ", "はぁ？ちょっとやめてださないでよ", "最低で低俗ね、、鏡観たことある？", "あ？？は？？"]
+        simoneta_hentou_tinnpoxx = random.choice(random_simoneta_hentou13)
+        await message.channel.send(simoneta_hentou_tinnpoxx)     
+
     # 名前付きで返す 
     if message.content.endswith("ライラ"):
         random_namae_henji = ["君呼んだ？", "君呼んだー？", "君なんか用ー？", "君やほい", "君おつかり！", "君やっほ！", "君呼んだかな～？", "♡"]
