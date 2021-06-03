@@ -133,6 +133,7 @@ async def greeting_jp_message(message):
     
     # ポートフォリオに適さない為、64行分Githubから削除
      
+
     # 名前付きで返す 
     if message.content.endswith("ライラ"):
         random_namae_henji = ["君呼んだ？", "君呼んだー？", "君なんか用ー？", "君やほい", "君おつかり！", "君やっほ！", "君呼んだかな～？", "♡"]
