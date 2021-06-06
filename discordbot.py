@@ -42,7 +42,7 @@ async def on_message(message):
         return
 
     # メッセージやメンションを貰うとそのユーザーのsavが日付ごとに作成・リストにその内容が追記される。
-    if message.content.endswith("セーブファイル作って"):
+    if message.content.endswith("セーブファイルお願い"):
         random_mention = ["君の事憶えとくね！", "これから憶えとくね！", "記憶力〇", "記憶力◎", "記憶しとくよ～"]
         mention_hentou = random.choice(random_mention)
         reply = f'{message.author.mention}' + mention_hentou 
@@ -67,9 +67,15 @@ async def on_message(message):
     if message.content.endswith("占いお願い"):
         uranai_message = random.choice(uranai)
         await message.channel.send("はーい！　今日の運勢は・・・・・・・" + "::" + uranai_message + "::")
+    
+    # サイコロ機能
+    if message.content.endswith("６面サイコロお願い"):
+        saikoro_random6 = random.randrange(1,6)
+        saikoro6 = str(saikoro_random6)
+        await message.channel.send("はいよ！" + saikoro6)
 
     # ランダム12桁整数
-    if message.content.endswith("パスワード作って"): 
+    if message.content.endswith("パスワードお願い"): 
         num_random12 = random.randrange(100000000000,999999999999)
         random12 = str(num_random12)
         await message.channel.send("はいよ！" + random12)
@@ -104,7 +110,7 @@ async def on_message(message):
                break  
     
     # google検索モードへの切り替え
-    if message.content.endswith("検索して"):
+    if message.content.endswith("検索お願い"):
         ModeFlag = 1
         await message.channel.send("何について調べるー？")  
     
@@ -143,7 +149,7 @@ async def on_message(message):
     await news_scraping.life_news_message(message)
 
     await news_scraping.local_news_message(message)
-
+    
     await spreadsheet.ledger(message)
 
     #!SHUTDOWN_BOTが入力されたら強制終了
