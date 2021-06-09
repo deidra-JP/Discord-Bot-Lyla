@@ -17,7 +17,7 @@ async def economy_news_message(message):
     if message.content.endswith("経済ニュースお願い"):
         response = requests.get("https://news.yahoo.co.jp/categories/business")
         html = BeautifulSoup(response.content, 'html.parser')
-        topic = html.find(class_ = "sc-jgVwMx iXtPJx")
+        topic = html.find(class_ = "sc-ijnzTp gwzQeR")
         for news_e_message in topic.find_all("a"): 
             n_e_m_text = news_e_message.text
             news_list.append(n_e_m_text)
@@ -36,7 +36,7 @@ async def domestic_news_message(message):
     if message.content.endswith("国内ニュースお願い"):
         response = requests.get("https://news.yahoo.co.jp/categories/domestic")
         html = BeautifulSoup(response.content, 'html.parser')
-        topic = html.find(class_ = "sc-jgVwMx iXtPJx")
+        topic = html.find(class_ = "sc-ijnzTp gwzQeR")
         for news_d_message in topic.find_all("a"): 
             n_d_m_text = news_d_message.text
             news_list.append(n_d_m_text)
@@ -55,7 +55,7 @@ async def world_news_message(message):
     if message.content.endswith("国際ニュースお願い"):
         response = requests.get("https://news.yahoo.co.jp/categories/world")
         html = BeautifulSoup(response.content, 'html.parser')
-        topic = html.find(class_ = "sc-jgVwMx iXtPJx")
+        topic = html.find(class_ = "sc-ijnzTp gwzQeR")
         for news_w_message in topic.find_all("a"): 
             n_w_m_text = news_w_message.text
             news_list.append(n_w_m_text)
@@ -74,7 +74,7 @@ async def entertainment_news_message(message):
     if message.content.endswith("エンタメニュースお願い"):
         response = requests.get("https://news.yahoo.co.jp/categories/entertainment")
         html = BeautifulSoup(response.content, 'html.parser')
-        topic = html.find(class_ = "sc-jgVwMx iXtPJx")
+        topic = html.find(class_ = "sc-ijnzTp gwzQeR")
         for news_et_message in topic.find_all("a"): 
             n_et_m_text = news_et_message.text
             news_list.append(n_et_m_text)
@@ -93,7 +93,7 @@ async def sports_news_message(message):
     if message.content.endswith("スポーツニュースお願い"):
         response = requests.get("https://news.yahoo.co.jp/categories/sports")
         html = BeautifulSoup(response.content, 'html.parser')
-        topic = html.find(class_ = "sc-jgVwMx iXtPJx")
+        topic = html.find(class_ = "sc-ijnzTp gwzQeR")
         for news_s_message in topic.find_all("a"): 
             n_s_m_text = news_s_message.text
             news_list.append(n_s_m_text)
@@ -112,7 +112,7 @@ async def it_news_message(message):
     if message.content.endswith("ITニュースお願い"):
         response = requests.get("https://news.yahoo.co.jp/categories/it")
         html = BeautifulSoup(response.content, 'html.parser')
-        topic = html.find(class_ = "sc-jgVwMx iXtPJx")
+        topic = html.find(class_ = "sc-ijnzTp gwzQeR")
         for news_i_message in topic.find_all("a"): 
             n_i_m_text = news_i_message.text
             news_list.append(n_i_m_text)
@@ -131,7 +131,7 @@ async def science_news_message(message):
     if message.content.endswith("サイエンスニュースお願い"):
         response = requests.get("https://news.yahoo.co.jp/categories/science")
         html = BeautifulSoup(response.content, 'html.parser')
-        topic = html.find(class_ = "sc-jgVwMx iXtPJx")
+        topic = html.find(class_ = "sc-ijnzTp gwzQeR")
         for news_ss_message in topic.find_all("a"): 
             n_ss_m_text = news_ss_message.text
             news_list.append(n_ss_m_text)
@@ -150,7 +150,7 @@ async def life_news_message(message):
     if message.content.endswith("ライフニュースお願い"):
         response = requests.get("https://news.yahoo.co.jp/categories/life")
         html = BeautifulSoup(response.content, 'html.parser')
-        topic = html.find(class_ = "sc-jgVwMx iXtPJx")
+        topic = html.find(class_ = "sc-ijnzTp gwzQeR")
         for news_l_message in topic.find_all("a"): 
             n_l_m_text = news_l_message.text
             news_list.append(n_l_m_text)
@@ -169,7 +169,7 @@ async def local_news_message(message):
     if message.content.endswith("ローカルニュースお願い"):
         response = requests.get("https://news.yahoo.co.jp/categories/local")
         html = BeautifulSoup(response.content, 'html.parser')
-        topic = html.find(class_ = "sc-jgVwMx iXtPJx")
+        topic = html.find(class_ = "sc-ijnzTp gwzQeR")
         for news_lo_message in topic.find_all("a"): 
             n_lo_m_text = news_lo_message.text
             news_list.append(n_lo_m_text)

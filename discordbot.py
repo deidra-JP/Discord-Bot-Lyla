@@ -13,6 +13,7 @@ from module import weather_forecast
 from module import greeting_jp
 from module import news_scraping
 from module import spreadsheet
+from dna import ability
 from googlesearch import search
 
 
@@ -21,6 +22,7 @@ TOKEN = CONFIG['config']['token']
 CHANNELID = CONFIG['config']['channel_id']
 client = discord.Client()
 uranai = CONFIG['uranai_list'] 
+slot = CONFIG['slot_list']
 path = "C:/Users/deidra/Desktop/学習用プロジェクト/Py_discord_bot_lyla/.info/.user_info/"
 ModeFlag = 0
 datetime_today = f'{datetime.date.today()}'
@@ -73,6 +75,11 @@ async def on_message(message):
         saikoro_random6 = random.randrange(1,6)
         saikoro6 = str(saikoro_random6)
         await message.channel.send("はいよ！" + saikoro6)
+    
+    # スロットゲーム機能
+    if message.content.endswith("スロットゲームお願い"):
+        slot_random_shuffle = random.sample(slot, 5)
+        await message.channel.send(slot_random_shuffle)
 
     # ランダム12桁整数
     if message.content.endswith("パスワードお願い"): 
@@ -151,6 +158,8 @@ async def on_message(message):
     await news_scraping.local_news_message(message)
     
     await spreadsheet.ledger(message)
+
+    await ability.choice_ability(message)
 
     #!SHUTDOWN_BOTが入力されたら強制終了
     if message.content.endswith("!SHUTDOWN_BOT_LYLA"):
