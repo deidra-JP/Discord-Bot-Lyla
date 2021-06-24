@@ -133,6 +133,12 @@ async def greeting_jp_message(message):
     
     # ポートフォリオに適さない為、64行分Githubから削除
      
+    
+    if message.content.endswith("死ね"):
+        random_sine_hentou1 = ["お前が死ね", "お前が死ねボケ", "頭に蛆湧いてんのか？お前が死ねボケ", "死ねボケ"]
+        sine_hentou_sineboke = random.choice(random_sine_hentou1)
+        await message.channel.send(sine_hentou_sineboke)
+
     # 名前付きで返す 
     if message.content.endswith("ライラ"):
         random_namae_henji = ["君呼んだ？", "君呼んだー？", "君なんか用ー？", "君やほい", "君おつかり！", "君やっほ！", "君呼んだかな～？", "♡"]

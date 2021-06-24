@@ -1,9 +1,9 @@
-from re import S
 import discord
 import datetime
 import gspread
 from google.oauth2.service_account import Credentials
-from gspread.models import Spreadsheet
+
+
 
 client = discord.Client()
 
@@ -125,7 +125,8 @@ async def ledger(message):
         else :       
             # テスト用　
             print(sh.worksheet(today).get("A1"))
-                
+    
+    # スプシ機能呼び出し            
     if message.content.endswith("スプレッドシートお願い"):
         worksheet_matome = 1
         worksheet_today = 1

@@ -13,20 +13,23 @@ from module import weather_forecast
 from module import greeting_jp
 from module import news_scraping
 from module import spreadsheet
+from module import game
 from dna import ability
 from googlesearch import search
 
 
-CONFIG = toml.load(open('/Users/deidra/Desktop/学習用プロジェクト/Py_discord_bot_lyla/config.toml', encoding="utf-8_sig"))
-TOKEN = CONFIG['config']['token']
-CHANNELID = CONFIG['config']['channel_id']
+CONFIG = toml.load(open("/Users/deidra/Desktop/学習用プロジェクト/Py_discord_bot_lyla/config.toml", encoding="utf-8_sig"))
+TOKEN = CONFIG["config"]["token"]
+CHANNELID = CONFIG["config"]["channel_id"]
 client = discord.Client()
-uranai = CONFIG['uranai_list'] 
-slot = CONFIG['slot_list']
+uranai = CONFIG["uranai_list"] 
 path = "C:/Users/deidra/Desktop/学習用プロジェクト/Py_discord_bot_lyla/.info/.user_info/"
 ModeFlag = 0
+CreateFlag = 0
 datetime_today = f'{datetime.date.today()}'
 user_info_list = []
+
+
 
 
 # 起動時に動作する処理
@@ -39,7 +42,10 @@ async def on_ready():
 # メッセージ受信時に動作する処理
 @client.event
 async def on_message(message):
+    
     global ModeFlag
+    global CreateFlag
+
     if message.author.bot:
         return
 
@@ -76,11 +82,6 @@ async def on_message(message):
         saikoro6 = str(saikoro_random6)
         await message.channel.send("はいよ！" + saikoro6)
     
-    # スロットゲーム機能
-    if message.content.endswith("スロットゲームお願い"):
-        slot_random_shuffle = random.sample(slot, 5)
-        await message.channel.send(slot_random_shuffle)
-
     # ランダム12桁整数
     if message.content.endswith("パスワードお願い"): 
         num_random12 = random.randrange(100000000000,999999999999)
@@ -92,10 +93,25 @@ async def on_message(message):
         str_CHANNELID = str(CHANNELID)
         Bot_War_ID = hashlib.sha256(TOKEN.encode('utf-8') + str_CHANNELID.encode('utf-8')).hexdigest()
         print(Bot_War_ID)
-
+        
     # しょーもな返答リスト
     if message.content.endswith("俺以外ダメージでてなさすぎ"):
         await message.channel.send("それで負けてるんだから意味ねえんだよ　しょーもないハラスしてる暇あったらオブジェクト絡めボケ") 
+
+    # チャンネルを作成する非同期関数を実行して発言したチャンネルのカテゴリ内にnewチャンネル作成
+    if CreateFlag == 1:
+        channel_name = message.content
+        category_id = message.channel.category_id
+        category = message.guild.get_channel(category_id)
+        new_channel = await category.create_text_channel(name = channel_name)
+        text = f'{new_channel.mention} を作成したよ！'
+        CreateFlag = 0
+        await message.channel.send(text)
+    
+    # チャンネルを作成する非同期関数の呼び出し
+    if message.content.startswith("チャンネル作成お願い"):
+        CreateFlag = 1
+        await message.channel.send("名前どうするー？")
 
     # 検索機能
     if message.content == '検索終了':
@@ -158,6 +174,12 @@ async def on_message(message):
     await news_scraping.local_news_message(message)
     
     await spreadsheet.ledger(message)
+
+    await spreadsheet.ledger(message)
+
+    await game.HieroMagia_message(message)
+
+    await game.Dicegame_message(message)
 
     await ability.choice_ability(message)
 
