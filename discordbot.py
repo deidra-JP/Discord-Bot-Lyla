@@ -181,6 +181,8 @@ async def on_message(message):
 
     await game.Dicegame_message(message)
 
+    await game.test(message)
+
     await ability.choice_ability(message)
 
     #!SHUTDOWN_BOTが入力されたら強制終了

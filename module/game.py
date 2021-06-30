@@ -9,7 +9,8 @@ game_path = "C:/Users/deidra/Desktop/学習用プロジェクト/Py_discord_bot_
 HieroglypheFlag = 0
 HieroglypheUserFlag = 0
 HUsercount = 0
-HUsercount_f1 = 0
+HUsercount_f = 0
+Hindexcount = 0
 HieroMagia_f1 = 0
 HieroMagia_f2 = 0
 HieroMagia_f3 = 0
@@ -17,8 +18,8 @@ HieroMagia_f4 = 0
 hieroglyphe_deck_list = []
 HieroMagia_game_user_list = []
 HieroMagia_game_hand_list = []
-HCardCheck = True
 message_reset = 0
+Card_Change = ""
 
 
 Dicegame_user_list = []
@@ -37,14 +38,15 @@ async def HieroMagia_message(message):
     global HieroglypheFlag
     global HieroglypheUserFlag
     global HUsercount
-    global HUsercount_f1
+    global HUsercount_f
+    global Hindexcount
     global HieroMagia_f1
     global HieroMagia_f2
     global HieroMagia_f3
     global HieroMagia_f4
     global hieroglyphe_deck_list
-    global HCardCheck
     global message_reset
+    global Card_Change
   
 
 
@@ -58,6 +60,7 @@ async def HieroMagia_message(message):
             await message.channel.send("把握")
         elif message.content == ("〆切"):    
             await message.channel.send("じゃあこれでゲーム始めるよ～")
+            await message.channel.send("最終的な手札の数字を合算し、一番値が大きかったプレイヤーが勝者だよ！")
             hieroglyphe_deck_list = ["𓄿  a - 1", "𓇋  a - 2", "𓇌  a - 3", "𓏭  a - 4",
               "𓂝  a - 5", "𓅱  a - 6", "𓏲  a - 7", "𓃀  a - 8", "𓊪  a - 9", "𓆑  a - 10",
               "𓅓  a - 11", "𓐝  a - 12", "𓈖  a - 13", "𓋔  b - 1", "𓂋  b - 2", "𓉔  b - 3",
@@ -95,36 +98,167 @@ async def HieroMagia_message(message):
         print(hieroglyphe_deck_list)
         HieroglypheFlag = 0
         HieroMagia_f1 = 1
-        await message.channel.send("１番の人から順に交換したい手札をコピペしてね！")
+        await message.channel.send("フェーズ１")
+        await message.channel.send("１番の人から順に、交換したい手札を1枚コピペしてね！")
 
     if HieroMagia_f1 == 1:   
         if not message.content.endswith("〆切"): 
-            for HieroMagia_f1_user in HieroMagia_game_user_list:
-                if message.author.name == HieroMagia_f1_user:
-                    HUsercount_f1 += 1
-                    Card_Change = message.content
-                    hm_text_path = os.path.join(game_path, "HieroMagia" + str(HieroMagia_f1_user) + "_hand.sav")        
-                    gfile = open(hm_text_path, "rb") 
-                    a_HHand_list = pickle.load(gfile)
-                    a_HHand_list.remove(Card_Change) 
-                    b_HHand_list = random.sample(hieroglyphe_deck_list, 1)
-                    c_HHand_list = b_HHand_list[0]
-                    a_HHand_list.append(c_HHand_list)
-                    hieroglyphe_deck_list.remove(c_HHand_list)
-                    gfile.close()
-                    gfile = open(hm_text_path, "wb")
-                    pickle.dump(a_HHand_list,gfile)
-                    gfile.close()
-                    await message.channel.send(a_HHand_list)
-                    for Change_HieroMagia_game_hand_list in a_HHand_list:
-                        await message.channel.send(Change_HieroMagia_game_hand_list)  
+            try:
+                for HieroMagia_f1_user in HieroMagia_game_user_list:
+                    if message.author.name == HieroMagia_f1_user:
+                        Card_Change = message.content
+                        hm_text_path = os.path.join(game_path, "HieroMagia" + str(HieroMagia_f1_user) + "_hand.sav")        
+                        gfile = open(hm_text_path, "rb") 
+                        a_HHand_list = pickle.load(gfile)
+                        if message.content in a_HHand_list:
+                            HUsercount_f += 1
+                            a_HHand_list.remove(Card_Change) 
+                        b_HHand_list = random.sample(hieroglyphe_deck_list, 1)
+                        c_HHand_list = b_HHand_list[0]
+                        a_HHand_list.append(c_HHand_list)
+                        hieroglyphe_deck_list.remove(c_HHand_list)
+                        gfile.close()
+                        gfile = open(hm_text_path, "wb")
+                        pickle.dump(a_HHand_list,gfile)
+                        gfile.close()
+                        await message.channel.send(a_HHand_list)
+                        for Change_HieroMagia_game_hand_list in a_HHand_list:
+                            await message.channel.send(Change_HieroMagia_game_hand_list)  
+                        print(hieroglyphe_deck_list)          
+                        if HUsercount == HUsercount_f:
+                            HieroMagia_f1 = 0
+                            HieroMagia_f2 = 1
+                            await message.channel.send("フェーズ２にいくよ！")
+                            await message.channel.send("フェーズ２")
+                            await message.channel.send("１番の人から順に、手札の中から交換したいアルファベットを一つコピペしてね！")
+                        else:
+                            await message.channel.send("次の人、交換したいカードを1枚コピペしてね！")
+            except ValueError:
+                f1_er_hentou = [".....", "ちゃんと自分の手札コピペしてね！", "そんなのないよ！", "^ ^"]
+                f1_er_hentou_random = random.choice(f1_er_hentou)
+                await message.channel.send(f1_er_hentou_random)
+
+    if HieroMagia_f2 == 1:
+        HUsercount_f = 0
+        if message.content != Card_Change:
+            try:
+                for HieroMagia_f2_user in HieroMagia_game_user_list:
+                    if message.author.name == HieroMagia_f2_user:
+                        HUsercount_f += 1
+                        if message.content == "a":
+                            hm_text_path = os.path.join(game_path, "HieroMagia" + str(HieroMagia_f2_user) + "_hand.sav")        
+                            gfile = open(hm_text_path, "rb") 
+                            a_HHand_list = pickle.load(gfile)
+                            Card_Change_f = [Card_Change_f for Card_Change_f in a_HHand_list if "a" in a_HHand_list]
+                            print(Card_Change_f) 
+                            for Card_Change_ff in Card_Change_f:
+                                a_HHand_list.remove(Card_Change_ff) 
+                            Card_Change_count = len(Card_Change_f)
+                            hieroglyphe_deck_list_abcd = [ i for i in hieroglyphe_deck_list if "a" in hieroglyphe_deck_list]
+                            b_HHand_list = random.sample(hieroglyphe_deck_list_abcd, Card_Change_count)
+                            for H_index_append in b_HHand_list:
+                                c_HHand_list = H_index_append[Hindexcount]                                   
+                                a_HHand_list.append(c_HHand_list)
+                                hieroglyphe_deck_list.remove(c_HHand_list)
+                                Hindexcount += 1
+                            gfile.close()
+                            gfile = open(hm_text_path, "wb")
+                            pickle.dump(a_HHand_list,gfile)
+                            gfile.close()
+                            Hindexcount = 0
+                            await message.channel.send(a_HHand_list)
+                            for Change_HieroMagia_game_hand_list in a_HHand_list:
+                                await message.channel.send(Change_HieroMagia_game_hand_list)  
+                        if message.content == "b":
+                            hm_text_path = os.path.join(game_path, "HieroMagia" + str(HieroMagia_f2_user) + "_hand.sav")        
+                            gfile = open(hm_text_path, "rb") 
+                            a_HHand_list = pickle.load(gfile)
+                            Card_Change_f = [Card_Change_f for Card_Change_f in a_HHand_list if "b" in a_HHand_list]
+                            print(Card_Change_f) 
+                            for Card_Change_ff in Card_Change_f:
+                                a_HHand_list.remove(Card_Change_ff) 
+                            Card_Change_count = len(Card_Change_f)
+                            hieroglyphe_deck_list_abcd = [ i for i in hieroglyphe_deck_list if "b" in hieroglyphe_deck_list]
+                            b_HHand_list = random.sample(hieroglyphe_deck_list_abcd, Card_Change_count)
+                            for H_index_append in b_HHand_list:
+                                c_HHand_list = H_index_append[Hindexcount]                                   
+                                a_HHand_list.append(c_HHand_list)
+                                hieroglyphe_deck_list.remove(c_HHand_list)
+                                Hindexcount += 1
+                            gfile.close()
+                            gfile = open(hm_text_path, "wb")
+                            pickle.dump(a_HHand_list,gfile)
+                            gfile.close()
+                            Hindexcount = 0
+                            await message.channel.send(a_HHand_list)
+                            for Change_HieroMagia_game_hand_list in a_HHand_list:
+                                await message.channel.send(Change_HieroMagia_game_hand_list)  
+                        if message.content == "c":
+                            hm_text_path = os.path.join(game_path, "HieroMagia" + str(HieroMagia_f2_user) + "_hand.sav")        
+                            gfile = open(hm_text_path, "rb") 
+                            a_HHand_list = pickle.load(gfile)
+                            Card_Change_f = [Card_Change_f for Card_Change_f in a_HHand_list if "c" in a_HHand_list]
+                            print(Card_Change_f) 
+                            for Card_Change_ff in Card_Change_f:
+                                a_HHand_list.remove(Card_Change_ff) 
+                            Card_Change_count = len(Card_Change_f)
+                            hieroglyphe_deck_list_abcd = [ i for i in hieroglyphe_deck_list if "c" in hieroglyphe_deck_list]
+                            b_HHand_list = random.sample(hieroglyphe_deck_list_abcd, Card_Change_count)
+                            for H_index_append in b_HHand_list:
+                                c_HHand_list = H_index_append[Hindexcount]                                   
+                                a_HHand_list.append(c_HHand_list)
+                                hieroglyphe_deck_list.remove(c_HHand_list)
+                                Hindexcount += 1
+                            gfile.close()
+                            gfile = open(hm_text_path, "wb")
+                            pickle.dump(a_HHand_list,gfile)
+                            gfile.close()
+                            Hindexcount = 0
+                            await message.channel.send(a_HHand_list)
+                            for Change_HieroMagia_game_hand_list in a_HHand_list:
+                                await message.channel.send(Change_HieroMagia_game_hand_list)  
+                        if message.content == "d":
+                            hm_text_path = os.path.join(game_path, "HieroMagia" + str(HieroMagia_f2_user) + "_hand.sav")        
+                            gfile = open(hm_text_path, "rb") 
+                            a_HHand_list = pickle.load(gfile)
+                            Card_Change_f = [Card_Change_f for Card_Change_f in a_HHand_list if "d" in a_HHand_list]
+                            print(Card_Change_f) 
+                            for Card_Change_ff in Card_Change_f:
+                                a_HHand_list.remove(Card_Change_ff) 
+                            Card_Change_count = len(Card_Change_f)
+                            hieroglyphe_deck_list_abcd = [ i for i in hieroglyphe_deck_list if "d" in hieroglyphe_deck_list]
+                            b_HHand_list = random.sample(hieroglyphe_deck_list_abcd, Card_Change_count)
+                            for H_index_append in b_HHand_list:
+                                c_HHand_list = H_index_append[Hindexcount]                                   
+                                a_HHand_list.append(c_HHand_list)
+                                hieroglyphe_deck_list.remove(c_HHand_list)
+                                Hindexcount += 1
+                            gfile.close()
+                            gfile = open(hm_text_path, "wb")
+                            pickle.dump(a_HHand_list,gfile)
+                            gfile.close()
+                            Hindexcount = 0
+                            await message.channel.send(a_HHand_list)
+                            for Change_HieroMagia_game_hand_list in a_HHand_list:
+                                await message.channel.send(Change_HieroMagia_game_hand_list)  
                     print(hieroglyphe_deck_list)          
-                    if HUsercount == HUsercount_f1:
-                        HieroMagia_f1 = 0
-                        HieroMagia_f2 = 1
-                        await message.channel.send("フェーズ２にいくよ！")
+                    if HUsercount == HUsercount_f:
+                        HieroMagia_f2 = 0
+                        HieroMagia_f3 = 1
+                        await message.channel.send("フェーズ３にいくよ！")
                     else:
-                        await message.channel.send("次の人交換したいカードをコピペしてね！")
+                        await message.channel.send("次の人、手札の中から交換したいアルファベットを一つコピペしてね！")
+            except ValueError:
+                f2_er_hentou = [".....", "ちゃんと自分の手札にあるやつコピペしてね！", "そんなのないよ！", "。。；"]
+                f2_er_hentou_random = random.choice(f2_er_hentou)
+                await message.channel.send(f2_er_hentou_random)        
+
+
+            
+
+
+        
+
     # HieroMagia ゲーム機能呼び出し (0)
     if message.content.endswith("HieroMagiaお願い"):
         await message.channel.send("誰が遊ぶ-？ やるなら参戦って打って！OKだったら〆切って打ってね～")
@@ -188,3 +322,19 @@ async def Dicegame_message(message):
     if message.content.endswith("サイコロゲームお願い"):
         await message.channel.send("2人用ゲームね！参加者は参戦って入力して～")
         DicegameUserFlag = 1
+
+#お遊び
+async def _a(b, c = []):
+    c.append(b)
+    print(c)
+    return c
+
+async def test(message):
+    if message.content == "66":
+        test_a = message.content
+        test_b = int(test_a)
+        await _a(test_b)
+        
+  
+    
+            
